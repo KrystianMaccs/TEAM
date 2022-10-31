@@ -11,3 +11,11 @@ DATABASES = {
         'PORT': config("DATABASE_PORT"),
     }
 }
+
+# Email Settings
+"""EMAIL_USE_TLS: 
+EMAIL_HOST: 
+EMAIL_HOST_USER: config()
+EMAIL_HOST_PASSWORD: config()
+EMAIL_PORT: 
+EMAIL_BACKEND:"""
