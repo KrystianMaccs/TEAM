@@ -1,3 +1,5 @@
+from email.policy import default
+from tabnanny import verbose
 from TEAM.settings.base import AUTH_USER_MODEL
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -9,7 +11,7 @@ class Posts(TimeStampedUUIDModel):
     author = models.ForeignKey(AUTH_USER_MODEL, related_name = _("post"),
                                on_delete=models.CASCADE)
     title = models.CharField(max_length=150, verbose_name=_("Title"), default="What's your theory?")
-    body = models.TextField(verbose_name=_("Body"))
+    body = models.TextField(verbose_name=_("Body"), default="Enter text here...")
     likes = models.ManyToManyField(AUTH_USER_MODEL, related_name="likes")
     
     def __str__(self):
@@ -17,6 +19,9 @@ class Posts(TimeStampedUUIDModel):
     
     def total_likes(self):
         return self.likes.count()
+    
+    class Meta:
+        verbose_name_plural = "Posts"
 
 
 class Comment(models.Model):
@@ -26,3 +31,6 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.body
+    
+    class Meta:
+        verbose_name_plural = "Comments"
